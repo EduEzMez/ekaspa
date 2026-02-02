@@ -7,30 +7,10 @@
     <link rel="icon" type="image/png" href="https://i0.wp.com/kaspa.org/wp-content/uploads/2023/06/Kaspa-Icon-16.png?resize=16%2C16&ssl=1">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px 10px;
-            background-color: #f0f0f0;
-            transition: all 0.3s ease;
-            color: #333;
-        }
-        body.dark-mode {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-            filter: grayscale(100%);
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        body.dark-mode .container {
-            background-color: #2e2e2e;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.6);
-        }
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px 10px; background-color: #f0f0f0; transition: all 0.3s ease; color: #333; }
+        body.dark-mode { background-color: #1e1e1e; color: #e0e0e0; filter: grayscale(100%); }
+        .container { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        body.dark-mode .container { background-color: #2e2e2e; box-shadow: 0 2px 5px rgba(0,0,0,0.6); }
         h1, h2 { color: #333; text-align: center; }
         body.dark-mode h1, body.dark-mode h2 { color: #ffffff; }
         #resultados { margin-top: 20px; }
@@ -101,74 +81,12 @@
             transition: opacity 0.4s ease;
             font-weight: bold;
         }
-        #kaspa-calculator {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        body.dark-mode #kaspa-calculator {
-            background-color: #2e2e2e;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        }
-        #kaspa-calculator label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        #kaspa-amount {
-            padding: 8px;
-            width: 180px;
-            font-size: 16px;
-        }
-        #clear-amount {
-            padding: 8px 12px;
-            background: #ff5722;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-        #clear-amount:hover { background: #e64a19; }
-        #value-display {
-            margin-top: 15px;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        #value-display div {
-            margin: 8px 0;
-        }
         #alert-history { margin-top: 30px; padding: 15px; background-color: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         body.dark-mode #alert-history { background-color: #2e2e2e; }
         #alert-list { list-style: none; padding: 0; max-height: 400px; overflow-y: auto; }
-        .alert-item {
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 6px;
-            font-size: 14px;
-            position: relative;
-        }
-        .alert-delete {
-            position: absolute;
-            top: 8px;
-            right: 10px;
-            color: #f44336;
-            font-size: 18px;
-            cursor: pointer;
-            font-weight: bold;
-            background: rgba(255,255,255,0.8);
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            line-height: 24px;
-            text-align: center;
-        }
-        body.dark-mode .alert-delete {
-            background: rgba(0,0,0,0.7);
-            color: #ff9999;
-        }
+        .alert-item { padding: 10px; margin: 8px 0; border-radius: 6px; font-size: 14px; position: relative; }
+        .alert-delete { position: absolute; top: 8px; right: 10px; color: #f44336; font-size: 18px; cursor: pointer; font-weight: bold; background: rgba(255,255,255,0.8); border-radius: 50%; width: 24px; height: 24px; line-height: 24px; text-align: center; }
+        body.dark-mode .alert-delete { background: rgba(0,0,0,0.7); color: #ff9999; }
         .alert-delete:hover { color: #d32f2f; }
         .alert-compra { background-color: #e6ffe6; color: #006400; }
         body.dark-mode .alert-compra { background-color: #004d00; color: #90ee90; }
@@ -176,30 +94,12 @@
         body.dark-mode .alert-venta { background-color: #4d0000; color: #ff9999; }
         .alert-rebote { font-weight: bold; color: #0066cc; }
         body.dark-mode .alert-rebote { color: #66ccff; }
-        .history-buttons {
-            text-align: center;
-            margin: 15px 0;
-        }
-        .history-buttons button {
-            padding: 10px 18px;
-            margin: 0 8px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
+        .history-buttons { text-align: center; margin: 15px 0; }
+        .history-buttons button { padding: 10px 18px; margin: 0 8px; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.3s ease; }
         #clear-history { background-color: #ff5722; color: white; border: none; }
         #clear-history:hover { background-color: #e64a19; }
-        #delete-all-alerts {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            font-size: 20px;
-        }
-        #delete-all-alerts:hover {
-            background-color: #d32f2f;
-            transform: scale(1.1);
-        }
+        #delete-all-alerts { background-color: #f44336; color: white; border: none; font-size: 20px; }
+        #delete-all-alerts:hover { background-color: #d32f2f; transform: scale(1.1); }
         #export-csv { background-color: #2196f3; color: white; border: none; }
         #export-csv:hover { background-color: #1976d2; }
         body.dark-mode .history-buttons button { opacity: 0.9; }
@@ -208,23 +108,34 @@
         #asesor-recomendacion { font-size: 16px; line-height: 1.5; }
         #version { text-align: center; font-size: 12px; color: #888; margin-top: 20px; }
         body.dark-mode #version { color: #aaa; }
+        #retry-btn {
+            margin: 10px auto;
+            display: block;
+            padding: 10px 20px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #retry-btn:hover { background: #1976d2; }
     </style>
 </head>
 <body>
-    <!-- Controles superiores derechos - FIJOS -->
     <div id="top-controls-wrapper">
         <button id="toggle-sound" class="control-btn" title="Sonido de alerta: ON">♪</button>
         <button id="copy-data-btn" class="control-btn" title="Copiar datos">📄</button>
         <button id="theme-toggle" class="control-btn" title="Modo Oscuro">💡</button>
     </div>
 
-    <!-- Notificación temporal -->
     <div id="copy-toast">¡Datos copiados al portapapeles!</div>
 
     <div class="container">
         <h1>Análisis de Kaspa</h1>
         <div id="loading">Cargando datos...</div>
         <div id="resultados"></div>
+        <button id="retry-btn" style="display:none;">Reintentar carga</button>
         <div id="chart-container">
             <canvas id="precioChart"></canvas>
         </div>
@@ -232,27 +143,6 @@
     </div>
 
     <audio id="alertSound" src="https://www.soundjay.com/buttons/beep-01a.mp3" preload="auto"></audio>
-
-    <!-- Calculadora mejorada con persistencia y ARS -->
-    <div id="kaspa-calculator">
-        <h3>Calculadora de valor (persiste en tu navegador)</h3>
-        
-        <label for="kaspa-amount">Cantidad de Kaspa que tenés:</label><br>
-        <input type="number" id="kaspa-amount" placeholder="Ej: 10000" min="0" step="0.0001">
-        
-        <button id="clear-amount" style="margin-left: 10px; background: #ff5722; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer;">
-            Limpiar
-        </button>
-
-        <div id="value-display" style="margin-top: 15px; font-size: 1.1em; font-weight: bold;">
-            <div>Valor en USD: <span id="usd-value">-</span></div>
-            <div>Valor en ARS: <span id="ars-value">-</span></div>
-        </div>
-
-        <p style="font-size: 0.85em; color: #777; margin-top: 10px;">
-            El valor se actualiza automáticamente con el precio actual. Tus Kaspa quedan guardados localmente.
-        </p>
-    </div>
 
     <div id="alert-history">
         <h2>Histórico de Alertas (últimas 10)</h2>
@@ -269,15 +159,12 @@
         <p id="asesor-recomendacion">Esperando análisis...</p>
     </div>
 
-    <p id="version">Versión: alpha . 0023</p>
+    <p id="version">V.001</p>
 
     <script>
         let chart;
         let currentPrice = 0;
         let soundEnabled = true;
-
-        // Tasa ARS/USD - CAMBIAR ESTE VALOR CUANDO SEA NECESARIO
-        const arsPerUsd = 1200; // ← Actualiza este valor con la tasa blue/oficial/MEP que uses
 
         function calcularSMA(precios) {
             const suma = precios.reduce((acc, [_, precio]) => acc + precio, 0);
@@ -433,37 +320,73 @@
         async function analizarKaspa() {
             const resultadosDiv = document.getElementById('resultados');
             const loadingDiv = document.getElementById('loading');
+            const retryBtn = document.getElementById('retry-btn');
             const ultimaActualizacionDiv = document.getElementById('ultima-actualizacion');
             const alertSound = document.getElementById('alertSound');
             const asesorRecomendacion = document.getElementById('asesor-recomendacion');
 
             loadingDiv.style.display = 'block';
             resultadosDiv.innerHTML = '';
+            if (retryBtn) retryBtn.style.display = 'none';
             asesorRecomendacion.innerHTML = 'Esperando análisis...';
 
             try {
-                const proxy = 'https://corsproxy.io/?';
-                const precioUrl = proxy + encodeURIComponent('https://api.coingecko.com/api/v3/simple/price?ids=kaspa&vs_currencies=usd');
-                const chartUrl = proxy + encodeURIComponent('https://api.coingecko.com/api/v3/coins/kaspa/market_chart?vs_currency=usd&days=14&interval=daily');
+                // Fuente principal: CoinPaprika (sin proxy, estable en Netlify)
+                let currentPriceTemp = 0;
+                try {
+                    const precioResponse = await fetch('https://api.coinpaprika.com/v1/tickers/kas-kaspa');
+                    if (!precioResponse.ok) throw new Error(`CoinPaprika HTTP ${precioResponse.status}`);
+                    const precioData = await precioResponse.json();
+                    currentPriceTemp = Number(precioData?.quotes?.USD?.price) || 0;
+                } catch (papError) {
+                    console.warn("CoinPaprika falló:", papError);
+                }
 
-                const precioActualResponse = await fetch(precioUrl);
-                const datosHistoricosResponse = await fetch(chartUrl);
+                // Fallback a CoinGecko con proxy mejor y headers
+                if (currentPriceTemp <= 0) {
+                    const proxy = 'https://api.allorigins.win/raw?url=';
+                    const precioUrl = proxy + encodeURIComponent('https://api.coingecko.com/api/v3/simple/price?ids=kaspa&vs_currencies=usd');
+                    const response = await fetch(precioUrl, {
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                        }
+                    });
+                    if (!response.ok) throw new Error(`CoinGecko HTTP ${response.status}`);
+                    const data = await response.json();
+                    if (!data?.kaspa?.usd) throw new Error("Datos inválidos en CoinGecko");
+                    currentPriceTemp = Number(data.kaspa.usd);
+                }
 
-                const precioActual = await precioActualResponse.json();
-                const datosHistoricos = await datosHistoricosResponse.json();
+                currentPrice = currentPriceTemp;
 
-                currentPrice = Number(precioActual.kaspa.usd);
-                if (isNaN(currentPrice)) currentPrice = parseFloat(precioActual.kaspa.usd) || 0;
+                // Gráfico: intentamos con proxy + headers
+                let precios = [];
+                try {
+                    const proxy = 'https://api.allorigins.win/raw?url=';
+                    const chartUrl = proxy + encodeURIComponent('https://api.coingecko.com/api/v3/coins/kaspa/market_chart?vs_currency=usd&days=14&interval=daily');
+                    const response = await fetch(chartUrl, {
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                        }
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        precios = data.prices || [];
+                    }
+                } catch (chartError) {
+                    console.warn("Gráfico falló:", chartError);
+                }
 
-                const precios = datosHistoricos.prices;
+                // Fallback dummy si no hay datos de gráfico
+                if (precios.length < 5) {
+                    precios = Array(14).fill([Date.now(), currentPrice]);
+                }
 
                 const smaCorto = calcularSMA(precios.slice(-5));
                 const smaLargo = calcularSMA(precios.slice(-14));
-
-                const preciosValores = precios.map(([_, precio]) => precio);
+                const preciosValores = precios.map(([_, p]) => p);
                 const soporte = Math.min(...preciosValores);
                 const resistencia = Math.max(...preciosValores);
-
                 const atr = calcularATR(precios);
                 const fiboLevels = calcularFibonacci(soporte, resistencia);
 
@@ -473,8 +396,8 @@
 
                 resultadosDiv.innerHTML = `
                     <div class="dato precio">Precio actual: $${currentPrice.toFixed(6)}</div>
-                    <div class="dato sma">SMA 5 días: $${smaCorto}</div>
-                    <div class="dato sma">SMA 14 días: $${smaLargo}</div>
+                    <div class="dato sma">SMA 5 días: $${smaCorto.toFixed(4)}</div>
+                    <div class="dato sma">SMA 14 días: $${smaLargo.toFixed(4)}</div>
                     <div class="dato tecnico">Soporte: $${soporte.toFixed(4)}</div>
                     <div class="dato tecnico">Resistencia: $${resistencia.toFixed(4)}</div>
                     <div class="dato tecnico">ATR (aprox.): $${atr.toFixed(4)}</div>
@@ -507,11 +430,15 @@
 
                 actualizarMaxRebote();
 
-                // Actualizar calculadora con nuevo precio
-                updateCalculatorValues();
-
             } catch (error) {
-                resultadosDiv.innerHTML = `<div class="recomendacion vender">Error al cargar datos: ${error.message}<br><br>Intenta recargar (F5) o abrir con servidor local.</div>`;
+                resultadosDiv.innerHTML = `
+                    <div class="recomendacion vender">
+                        Error al cargar datos: ${error.message}<br><br>
+                        Posibles causas: bloqueo temporal de la API o conexión inestable.<br>
+                        Prueba recargar (F5), cambiar de red o usar VPN.
+                    </div>
+                `;
+                if (retryBtn) retryBtn.style.display = 'block';
             } finally {
                 loadingDiv.style.display = 'none';
             }
@@ -532,7 +459,6 @@
             asesorRecomendacion.innerHTML = sugerencia;
         }
 
-        // Copiar datos
         document.getElementById('copy-data-btn').addEventListener('click', () => {
             const datos = document.querySelectorAll('.dato');
             const recomendacionDiv = document.querySelector('.recomendacion');
@@ -579,46 +505,6 @@
             });
         });
 
-        // Calculadora con persistencia y ARS
-        function updateCalculatorValues() {
-            const amountInput = document.getElementById('kaspa-amount');
-            const amount = parseFloat(amountInput.value) || 0;
-
-            const usdValue = amount * currentPrice;
-            const arsValue = usdValue * arsPerUsd;
-
-            document.getElementById('usd-value').textContent = 
-                usdValue > 0 ? `$${usdValue.toFixed(2)} USD` : '-';
-
-            document.getElementById('ars-value').textContent = 
-                arsValue > 0 ? `$${arsValue.toLocaleString('es-AR')} ARS` : '-';
-        }
-
-        // Cargar cantidad guardada al iniciar
-        window.addEventListener('load', () => {
-            const savedAmount = localStorage.getItem('kaspaAmount');
-            if (savedAmount) {
-                document.getElementById('kaspa-amount').value = savedAmount;
-                updateCalculatorValues();
-            }
-        });
-
-        // Guardar cantidad cuando cambia
-        document.getElementById('kaspa-amount').addEventListener('input', () => {
-            const amount = parseFloat(document.getElementById('kaspa-amount').value) || 0;
-            localStorage.setItem('kaspaAmount', amount);
-            updateCalculatorValues();
-        });
-
-        // Limpiar cantidad
-        document.getElementById('clear-amount').addEventListener('click', () => {
-            if (confirm('¿Querés borrar la cantidad de Kaspa guardada?')) {
-                localStorage.removeItem('kaspaAmount');
-                document.getElementById('kaspa-amount').value = '';
-                updateCalculatorValues();
-            }
-        });
-
         window.onload = () => {
             analizarKaspa();
             actualizarHistorico();
@@ -657,11 +543,13 @@
                     alert("¡Todas las alertas han sido eliminadas! 🗑️");
                 }
             });
+
+            document.getElementById('retry-btn').addEventListener('click', analizarKaspa);
         };
 
         setInterval(analizarKaspa, 300000);
     </script>
 
-    <!-- Versión: alpha . 0023 -->
+    <!-- Versión: V.001 -->
 </body>
 </html>
